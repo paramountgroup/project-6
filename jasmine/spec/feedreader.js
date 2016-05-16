@@ -8,7 +8,6 @@
  * since some of these tests may require DOM elements. We want
  * to ensure they don't run until the DOM is ready.
  */
- var initialEntries;
  
 $(function() {
     /* This is our first test suite - a test suite just contains
@@ -42,7 +41,7 @@ $(function() {
         });
                 
 
-        /* This is our third test that loops through each feed
+        /* This test loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
@@ -55,27 +54,30 @@ $(function() {
     });
 
 
-    /* TODO: Write a new test suite named "The menu" */
-     describe('The menu', function() {
-
-        /* TODO: Write a test that ensures the menu element is
+    /* Test suite named "The menu" */
+     /* This test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
+     describe('The menu', function() { 
+        var menuElement = $(".menu-icon-link");
+        it('Menu is hidden by default', function() {
+            expect($("body").hasClass("menu-hidden")).toBe(true);
+        });
 
-         /* TODO: Write a test that ensures the menu changes
+         /* Test to ensure the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
      });
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+    /* Test suite named "Initial Entries" */
     describe('Initial Entries', function() {
 
 
-        /* This is our sixth a test that ensures when the loadFeed
+        /* This test ensures that when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test will require
@@ -86,9 +88,9 @@ $(function() {
              loadFeed(0, done);  //signal asyncronous is complete and continue testing
          });
          
-         it('There is a single entry element within the feed container', function() {
+         it('There is at least a single entry element within the feed container', function() {
              // use jQuery :has() Selector to select entry from feed
-            initialEntries = $(".feed").has(".entry");
+            var initialEntries = $(".feed").has(".entry");
             expect(initialEntries.length).toBeGreaterThan(0);
 
          });  
