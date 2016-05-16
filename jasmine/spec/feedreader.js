@@ -8,6 +8,8 @@
  * since some of these tests may require DOM elements. We want
  * to ensure they don't run until the DOM is ready.
  */
+ var initialEntries;
+ 
 $(function() {
     /* This is our first test suite - a test suite just contains
     * a related set of tests. This suite is all about the RSS
@@ -49,7 +51,7 @@ $(function() {
                 expect (allFeeds[i].name).toBeDefined();
                 expect (allFeeds[i].name).not.toBe("");
             }
-        });
+         });
     });
 
 
@@ -73,12 +75,23 @@ $(function() {
     describe('Initial Entries', function() {
 
 
-        /* TODO: Write a test that ensures when the loadFeed
+        /* This is our sixth a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+         
+         beforeEach(function(done) {
+             loadFeed(0, done);  //signal asyncronous is complete and continue testing
+         });
+         
+         it('There is a single entry element within the feed container', function() {
+             // use jQuery :has() Selector to select entry from feed
+            initialEntries = $(".feed").has(".entry");
+            expect(initialEntries.length).toBeGreaterThan(0);
+
+         });  
      });
      
     /* TODO: Write a new test suite named "New Feed Selection" */
