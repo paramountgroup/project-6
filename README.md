@@ -15,7 +15,7 @@ Should there be any errors, `spec` details will be show in red, otherwise, green
 3. Test suite named "The menu".
 4. Test that ensures the menu element is hidden by default. Analyzing the HTML and the CSS to determine how we're performing the hiding/showing of the menu element.
 5. Test that ensures the menu changes visibility when the menu icon is clicked. This has two expectations: does the menu display when clicked and does it hide when clicked again.
-6. Test that ensures when the loadFeed function is called and completes its work, there is at least a single .entry element within the .feed container. loadFeed() is asynchronous so this test wil require the use of Jasmine's beforeEach and asynchronous done() function.
+6. Test that ensures when the loadFeed function is called and completes its work, there is at least a single .entry element within the .feed container. loadFeed() is asynchronous this test requires the use of Jasmine's beforeEach and asynchronous done() function.
 7. Test that ensures when a new feed is loaded by the loadFeed function that the content actually changes. loadFeed() is asynchronous.
 8. Complete - all tests pass.
 
