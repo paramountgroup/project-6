@@ -62,7 +62,7 @@ $(function() {
          */
      describe('The menu', function() { 
         var menuElement = $(".menu-icon-link");
-        it('Menu is hidden by default', function() {
+        it('Menu is hidden by default', function() { // verify menu is hidden
             expect($("body").hasClass("menu-hidden")).toBe(true);
         });
 
@@ -71,11 +71,18 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+          it('The menu changes visbility when the menu icon is clicked', function() {
+              //when menu is clicked it is visible
+              menuElement.click();
+              expect($("body").hasClass("menu-hidden")).toBe(false);
+              //when menu is clicked again it is hidden
+              menuElement.click();
+              expect($("body").hasClass("menu-hidden")).toBe(true);
+          });
      });
 
     /* Test suite named "Initial Entries" */
     describe('Initial Entries', function() {
-
 
         /* This test ensures that when the loadFeed
          * function is called and completes its work, there is at least
@@ -89,19 +96,35 @@ $(function() {
          });
          
          it('There is at least a single entry element within the feed container', function() {
-             // use jQuery :has() Selector to select entry from feed
+             // use jQuery :has() Selector to select entry from feed and verify at least one entry
             var initialEntries = $(".feed").has(".entry");
             expect(initialEntries.length).toBeGreaterThan(0);
 
          });  
      });
      
-    /* TODO: Write a new test suite named "New Feed Selection" */
+    /* Test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
 
-        /* TODO: Write a test that ensures when a new feed is loaded
+        /* Test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
+         *  loadFeed() is asynchronous.
          */
+         var previousEntry;
+         beforeEach(function(done) { // jasmine beforeEach and done utilized because loadFeed() is asynchronous
+             loadFeed(1, function() {
+                 previousEntry = $(".feed").html(); 
+                 done();
+             });
+         });
+          
+         
+         // Test that content changes when a new feed is loaded
+         it('New feed is loaded with loadFeed function and content changes', function(done) {
+             loadFeed(0, function() {
+             expect($(".feed").html()).not.toEqual(previousEntry);
+             done();             
+             });
+          });
     });
 }());
