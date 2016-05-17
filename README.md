@@ -1,6 +1,6 @@
 # Feed Reader Test
 
-####Run the `Feed Reader Test`
+# Run the Feed Reader Test
 1. Open the index.html in the browser or github.io link below
 5. Test Results, `7 specs, 0 failures`
 
